@@ -1,0 +1,15 @@
+# Compiled class files
+*.class
+/out/
+/bin/
+
+# OS / editor
+.DS_Store
+.idea/
+*.iml
+.vscode/
+
+# Keep dependency jars in lib/ (committed for plain javac builds)
+
+# Report documents are kept out of the public code repo (may contain personal info)
+*.docx
