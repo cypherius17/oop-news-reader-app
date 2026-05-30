@@ -10,8 +10,11 @@ import model.NewsSourceException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class SpaceflightSource extends AbstractHttpSource {
+
+    private static final Logger LOG = Logger.getLogger(SpaceflightSource.class.getName());
 
     private static final String ENDPOINT =
             "https://api.spaceflightnewsapi.net/v4/articles/?limit=20";
@@ -45,6 +48,7 @@ public class SpaceflightSource extends AbstractHttpSource {
         } catch (RuntimeException e) {
             throw new NewsSourceException("Could not parse response from " + getName(), e);
         }
+        LOG.info("Parsed " + articles.size() + " articles from " + getName());
         return articles;
     }
 

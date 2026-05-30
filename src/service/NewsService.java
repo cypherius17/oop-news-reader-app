@@ -8,8 +8,11 @@ import source.SpaceflightSource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class NewsService {
+
+    private static final Logger LOG = Logger.getLogger(NewsService.class.getName());
 
     private final List<NewsSource> sources;
 
@@ -33,7 +36,7 @@ public class NewsService {
             try {
                 all.addAll(source.fetchLatest());
             } catch (NewsSourceException e) {
-                System.err.println(e.getMessage());
+                LOG.warning(e.getMessage());
             }
         }
         return all;

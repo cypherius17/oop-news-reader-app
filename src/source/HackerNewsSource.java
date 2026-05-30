@@ -11,8 +11,11 @@ import model.NewsSourceException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class HackerNewsSource extends AbstractHttpSource {
+
+    private static final Logger LOG = Logger.getLogger(HackerNewsSource.class.getName());
 
     private static final String TOP_STORIES =
             "https://hacker-news.firebaseio.com/v0/topstories.json";
@@ -41,6 +44,7 @@ public class HackerNewsSource extends AbstractHttpSource {
         } catch (RuntimeException e) {
             throw new NewsSourceException("Could not parse response from " + getName(), e);
         }
+        LOG.info("Parsed " + articles.size() + " articles from " + getName());
         return articles;
     }
 

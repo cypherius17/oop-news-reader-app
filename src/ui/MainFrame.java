@@ -19,8 +19,11 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class MainFrame extends JFrame {
+
+    private static final Logger LOG = Logger.getLogger(MainFrame.class.getName());
 
     private final NewsService service = new NewsService();
     private final JComboBox<NewsSource> sourceSelector = new JComboBox<>();
@@ -74,6 +77,7 @@ public class MainFrame extends JFrame {
         if (source == null) {
             return;
         }
+        LOG.info("Fetch requested from " + source.getName());
         fetchButton.setEnabled(false);
         statusLabel.setText("Loading from " + source.getName() + " ...");
         listPanel.clear();
@@ -92,8 +96,11 @@ public class MainFrame extends JFrame {
                     listPanel.setArticles(articles);
                     statusLabel.setText(articles.size()
                             + " articles from " + source.getName());
+                    LOG.info("Loaded " + articles.size()
+                            + " articles from " + source.getName());
                 } catch (Exception ex) {
                     statusLabel.setText("Failed: " + rootMessage(ex));
+                    LOG.warning("Fetch failed: " + rootMessage(ex));
                 } finally {
                     fetchButton.setEnabled(true);
                 }
